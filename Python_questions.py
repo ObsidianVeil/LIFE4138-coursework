@@ -1,6 +1,10 @@
 #What question to answer?
+try:
+    Question = int(input("Question number?"))
 
-Question = int(input("Question number?"))
+except ValueError:
+    print("Invalid input. Please enter a number")
+    Question = None
 
 #Import libraries
 import pandas as pd
@@ -117,6 +121,7 @@ elif Question == 5:
     cars = pd.read_csv(mtcars)
     #print(cars)
     cars.plot.scatter(x = 'mpg', y = 'hp')
+    plt.show()
 
 #Question 6
 elif Question == 6:
@@ -198,4 +203,33 @@ elif Question == 8:
 
 
 elif Question == 9:
-    pass
+    diamonds = sns.load_dataset("diamonds")
+
+    dia_cost_low = diamonds.sort_values(by = "price", ascending = True)
+
+    cheapest_diamond = dia_cost_low.iloc[0]["price"]
+
+    print("Cheapest diamond: £", cheapest_diamond)
+
+
+    dia_cost_high = diamonds.sort_values(by = "price", ascending = False)
+
+    expensive_diamond = dia_cost_high.iloc[0]["price"]
+
+    print("Most expensive diamond:", expensive_diamond)
+
+
+
+elif Question == 10:
+    diamonds = sns.load_dataset("diamonds")
+
+    diamonds["weight_g"] = diamonds["carat"] * 0.2
+
+    dia_sort_carat = diamonds.sort_values(by = "weight_g", ascending = False)
+
+    heaviest_diamond_weight = dia_sort_carat.iloc[0]["weight_g"]
+
+    print("The heaviest diamond is: ", heaviest_diamond_weight, " grams")
+
+else:
+    print("Invalid question number")
